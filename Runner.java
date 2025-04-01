@@ -8,16 +8,40 @@ public class Runner {
         public static void main(String[] args)
         {
             String input;     // To hold input
-            int questions;    // Number of questions
-            int missed;       // Number of questions missed
+            int questions = 0 ;    // Number of questions
+            int missed = 0;       // Number of questions missed
 
             // Get the number of questions on the exam
             input = JOptionPane.showInputDialog("How many questions are on the exam?");
-            questions = Integer.parseInt(input);
+            try{
+                questions = Integer.parseInt(input);
+            }
+            catch (NumberFormatException e){
+                System.out.println("Error: Enter an integer, no letters");
+                System.exit(0);
+            }
+            finally{
+                if (questions == 0){
+                    System.out.println("Error: 0 questions on exam");
+                    System.exit(0);
+                }
+            }
 
             // Get the number of questions the student missed
             input = JOptionPane.showInputDialog("How many questions did the student miss?");
-            missed = Integer.parseInt(input);
+            try{
+                missed = Integer.parseInt(input);
+            }
+            catch (NumberFormatException e){
+                System.out.println("Error: Enter an integer, no letters");
+                System.exit(0);
+            }
+            finally{
+                if (missed > questions){
+                    System.out.println("Error: Missed questions is greater than total questions");
+                    System.exit(0);
+                }
+            }
 
             // Create an Exam object
             Exam exam = new Exam(questions, missed);
